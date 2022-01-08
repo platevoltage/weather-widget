@@ -2,9 +2,11 @@ const dateEl = document.getElementById('date');
 const forecastEl = document.getElementById('forecast');
 const previousSearchEl = document.getElementById('previous-search');
 const searchEl = document.getElementById('search');
-// console.log(header);
-var previousSearchArray = ["San Francisco, CA","Richmond, VA","Albuquerque, NM"];
+console.log(JSON.parse(localStorage.getItem("previousSearch")));
+var previousSearchArray = JSON.parse(localStorage.getItem("previousSearch"));
+// var previousSearchArray = ["San Francisco", "Richmond, VA"]
 var date = moment();
+
 
 dateEl.innerHTML = date.format('dddd, MMMM Do YYYY');
 
@@ -34,5 +36,5 @@ searchEl.addEventListener('submit', function(event) {
     newSave.innerHTML = search.value;
     previousSearchEl.insertBefore(newSave, previousSearchEl.firstChild);
     search.value = "";
-
+    localStorage.setItem("previousSearch", JSON.stringify(previousSearchArray) );
   });
