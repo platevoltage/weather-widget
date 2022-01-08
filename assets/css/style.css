@@ -1,3 +1,17 @@
 * {
-    background-color: #000000;
+    background-color: #141414;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    background-color: #2592f8;
+    width: 90%;
+    height: 500px;
+    margin-top: 50px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #000000;
 }
