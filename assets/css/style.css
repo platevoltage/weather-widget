@@ -62,10 +62,13 @@ header {
 }
 
 .forecast-day {
-    background-color: #0011ffa8;
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff33;
     width: 20%;
-    height: 160px;
+    height: 140px;
     margin: 10px;
+    padding: 10px;
 }
 
 
