@@ -1,4 +1,5 @@
 * {
+    font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS',  'sans-serif';
     border-radius: 10px;
 }
 
@@ -21,9 +22,17 @@ main {
 }
 
 aside {
+    font-size: 24px;  
     background-color: #ffffff33;
-    width: 300px;
+    width: 280px;
     margin: 10px;
+    padding: 10px;
+}
+
+input {
+    border-radius: 0px;
+    width: 90%;
+    font-size: 18px;
 }
 
 section {
@@ -37,13 +46,25 @@ section {
 header {
     background-color: #ffffff33;
     /* width: 100%; */
-    height: 240px;
+    height: 40%;
     margin-bottom: 10px;
 }
 
 #forecast {
+    display: flex;
+    /* justify-content: flex-end; */
     background-color: #ffffff33;
     /* width: 100%; */
     margin-top: 10px;
-    height: 100%;
+    /* height: 60%; */
 }
+
+.forecast-day {
+    background-color: #0011ffa8;
+    width: 20%;
+    height: 160px;
+    margin: 10px;
+}
+
+
+
