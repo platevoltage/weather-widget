@@ -7,6 +7,7 @@ const cityEl = document.getElementById('city');
 const coordinatesEl = document.getElementById('coordinates');
 const weatherEl = document.getElementById('weather');
 const weatherIconEl = document.getElementById('weather-icon');
+const backgroundImageEl = document.getElementById('background-image');
 const temperatureEl = document.getElementById('temperature');
 const humidityEl = document.getElementById('humidity');
 const windSpeedEl = document.getElementById('wind-speed');
@@ -248,8 +249,10 @@ searchEl.addEventListener('submit', function(event) {
             weatherEl.textContent = data.current.weather[0].main;
             if (night) {
                 weatherIconEl.innerHTML = iconsNight[data.current.weather[0].id];
+                backgroundImageEl.innerHTML = iconsNight[data.current.weather[0].id];
             } else {
                 weatherIconEl.innerHTML = iconsDay[data.current.weather[0].id];
+                backgroundImageEl.innerHTML = iconsNight[data.current.weather[0].id];
             }
             
 

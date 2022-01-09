@@ -203,5 +203,12 @@ header {
     /* bottom: 0px; */
     /* right: 10px; */
 }
+#background-image {
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;
+    font-size: 400px;
+    color: #ffffff10;
+}
 
 
