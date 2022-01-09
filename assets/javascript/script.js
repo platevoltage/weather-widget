@@ -7,6 +7,7 @@ const temperatureEl = document.getElementById('temperature');
 const humidityEl = document.getElementById('humidity');
 const windSpeedEl = document.getElementById('wind-speed');
 const uvIndexEl = document.getElementById('uv-index');
+const uvIndexContainerEl = document.getElementById('uv-index-container');
 
 
 const icons = {
@@ -65,13 +66,6 @@ const icons = {
     620 : "<i class='bi bi-cloud-snow'></i>",
     621 : "<i class='bi bi-cloud-snow'></i>",
     622 : "<i class='bi bi-cloud-snow'></i>",
-
-
-
-
-
-
-
 };
 
 
@@ -86,13 +80,15 @@ var previousSearchArray = [];
 if (localStorage.getItem("previousSearch")) {
     previousSearchArray = JSON.parse(localStorage.getItem("previousSearch"));
 }
-// var previousSearchArray = ["San Francisco", "Richmond, VA"]
 
-
-// console.log(JSON.parse(localStorage.getItem("previousSearch")));
 dateEl.innerHTML = date.format('dddd, MMMM Do YYYY');
 
 
+if (previousSearchArray.length > 0) {
+    weatherFetch(fiveDayURL + previousSearchArray[0] + apiKey);
+} else {
+    weatherFetch(fiveDayURL + "San Francisco" + apiKey);
+}
 
 updatePreviousSearch();
 
@@ -110,7 +106,6 @@ searchEl.addEventListener('submit', function(event) {
     let newSave = document.createElement("button");
     
     event.preventDefault();
-    // console.log(search.value);
     if (search.value) {
         previousSearchArray.unshift(search.value);
         newSave.innerHTML = search.value;
@@ -123,14 +118,11 @@ searchEl.addEventListener('submit', function(event) {
 
         }
         weatherFetch(fiveDayURL + search.value + apiKey);
-        // weatherFetch(weatherURL + search.value + apiKey);
         localStorage.setItem("previousSearch", JSON.stringify(previousSearchArray) );
         
         
         search.value = "";
         
-        
-        // console.log(weatherData);
     }
   });
 
@@ -178,52 +170,12 @@ searchEl.addEventListener('submit', function(event) {
         windSpeedEl.textContent = data.list[0].wind.speed + " mph";
       
 
-        console.log(data.list[0].weather[0].id); 
-        console.log(data.list[0].dt_txt); //date
-        console.log(data.list[0].weather[0].description); //condition
-        console.log(data.list[0].main.temp); //temp
-        console.log(data.list[0].main.humidity); //humidity
-        console.log(data.list[8].dt_txt); //date
-        console.log(data.list[8].weather[0].description); //condition
-        console.log(data.list[8].main.temp); //temp
-        console.log(data.list[8].main.humidity); //humidity
-        console.log(data.list[16].dt_txt); //date
-        console.log(data.list[16].weather[0].description); //condition
-        console.log(data.list[16].main.temp); //temp
-        console.log(data.list[16].main.humidity); //humidity
-        console.log(data.list[24].dt_txt); //date
-        console.log(data.list[24].weather[0].description); //condition
-        console.log(data.list[24].main.temp); //temp
-        console.log(data.list[24].main.humidity); //humidity
-        console.log(data.list[32].dt_txt); //date
-        console.log(data.list[32].weather[0].description); //condition
-        console.log(data.list[32].main.temp); //temp
-        console.log(data.list[32].main.humidity); //humidity
-        console.log(data.list[39].dt_txt); //date
-        console.log(data.list[39].weather[0].description); //condition
-        console.log(data.list[39].main.temp); //temp
-        console.log(data.list[39].main.humidity); //humidity
 
-        forecastEl.children[0].children[0].children[0].innerHTML = "Tomorrow";
-        forecastEl.children[0].children[0].children[1].innerHTML = icons[fiveDayForecast[0].weather];
-        forecastEl.children[0].children[0].children[2].innerHTML = fiveDayForecast[0].temp;
-
-        forecastEl.children[1].children[0].children[0].innerHTML = date.add(2,'days').format('dddd');
-        forecastEl.children[1].children[0].children[1].innerHTML = icons[fiveDayForecast[1].weather];;
-        forecastEl.children[1].children[0].children[2].innerHTML = fiveDayForecast[1].temp;
-
-        forecastEl.children[2].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-        forecastEl.children[2].children[0].children[1].innerHTML = icons[fiveDayForecast[2].weather];;
-        forecastEl.children[2].children[0].children[2].innerHTML = fiveDayForecast[2].temp;
-
-        forecastEl.children[3].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-        forecastEl.children[3].children[0].children[1].innerHTML = icons[fiveDayForecast[3].weather];;
-        forecastEl.children[3].children[0].children[2].innerHTML = fiveDayForecast[3].temp;
-
-        forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-        forecastEl.children[4].children[0].children[1].innerHTML = icons[fiveDayForecast[4].weather];;
-        forecastEl.children[4].children[0].children[2].innerHTML = fiveDayForecast[4].temp;
-
+        for (var i=0; i < 5; i++) {
+            forecastEl.children[i].children[0].children[0].innerHTML = "Tomorrow";
+            forecastEl.children[i].children[0].children[1].innerHTML = icons[fiveDayForecast[i].weather];
+            forecastEl.children[i].children[0].children[2].innerHTML = fiveDayForecast[i].temp;
+        }
 
         weatherFetch2(oneCallURL + lat + "&lon=" + lon + apiKey);
 
@@ -232,30 +184,50 @@ searchEl.addEventListener('submit', function(event) {
   function weatherFetch2(requestUrl) {
  
     fetch(requestUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log("data",data)
-        uvIndexEl.textContent = data.current.uvi;
-      });
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // console.log("data",data)
+            var uvIndex = data.current.uvi;
+            // var uvIndex = 4;
+            uvIndexEl.textContent = uvIndex;
+            switch (uvIndex) {
+                case 0:
+                case 1:
+                case 2: {
+                    uvIndexContainerEl.style.backgroundColor = "#00ff00dd";
+                    break;
+                }
+                case 3:
+                case 4:
+                case 5: {
+                    uvIndexContainerEl.style.backgroundColor = "#ffff00dd";
+                    break;
+                }
+                case 6:
+                case 7: {
+                    uvIndexContainerEl.style.backgroundColor = "#ff9900dd";
+                    break;
+                }
+                case 8: 
+                case 9: 
+                case 10: {
+                    uvIndexContainerEl.style.backgroundColor = "#ff0000dd";
+                    break;
+                }
+                default: {
+                    uvIndexContainerEl.style.backgroundColor = "#ff00ffdd";
+                    
+                }
+
+            }
+            
+        
+        // uvIndexContainerEl.style.backgroundColor = "#00ff00";
+
+
+        });
   }
 
-
-// forecastEl.children[0].children[0].children[0].innerHTML = "Tomorrow";
-// forecastEl.children[0].children[0].children[1].innerHTML = iconSleet;
-// forecastEl.children[1].children[0].children[0].innerHTML = date.add(2,'days').format('dddd');
-// forecastEl.children[1].children[0].children[1].innerHTML = iconSleet;
-// forecastEl.children[2].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-// forecastEl.children[2].children[0].children[1].innerHTML = iconSleet;
-// forecastEl.children[3].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-// forecastEl.children[3].children[0].children[1].innerHTML = iconSleet;
-// forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-// forecastEl.children[4].children[0].children[1].innerHTML = iconSleet;
-
-
-// forecastEl.children[1].innerHTML = "<span>"+date.add(2,'days').format('dddd')+"</span>";
-// forecastEl.children[2].innerHTML = date.add(1,'days').format('dddd');
-// forecastEl.children[3].innerHTML = date.add(1,'days').format('dddd');
-// forecastEl.children[4].innerHTML = date.add(1,'days').format('dddd');
 

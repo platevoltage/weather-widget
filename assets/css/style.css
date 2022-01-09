@@ -97,4 +97,10 @@ header {
     /* background-color: #ffffff33; */
 }
 
+#uv-index-container {
+    background-color: #ff0000bb;
+    width: 140px;
+    padding: 10px;
+}
+
 
