@@ -165,16 +165,19 @@ searchEl.addEventListener('submit', function(event) {
 
 
         cityEl.textContent = data.city.name;
-        temperatureEl.textContent = data.list[0].main.temp;
-        humidityEl.textContent = data.list[0].main.humidity;
-        windSpeedEl.textContent = data.list[0].wind.speed + " mph";
+        temperatureEl.textContent = Math.round( data.list[0].main.temp ) + "°F";
+        humidityEl.textContent = data.list[0].main.humidity + "%";
+        windSpeedEl.textContent = Math.round( data.list[0].wind.speed ) + " mph";
       
-
+        forecastEl.children[0].children[0].children[0].innerHTML = "Tomorrow";
+        forecastEl.children[1].children[0].children[0].innerHTML = date.add(2,'days').format('dddd');
+        forecastEl.children[2].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+        forecastEl.children[3].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+        forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
 
         for (var i=0; i < 5; i++) {
-            forecastEl.children[i].children[0].children[0].innerHTML = "Tomorrow";
             forecastEl.children[i].children[0].children[1].innerHTML = icons[fiveDayForecast[i].weather];
-            forecastEl.children[i].children[0].children[2].innerHTML = fiveDayForecast[i].temp;
+            forecastEl.children[i].children[0].children[2].innerHTML = Math.round( fiveDayForecast[i].temp ) + "°F";
         }
 
         weatherFetch2(oneCallURL + lat + "&lon=" + lon + apiKey);
