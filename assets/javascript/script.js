@@ -12,7 +12,9 @@ const humidityEl = document.getElementById('humidity');
 const windSpeedEl = document.getElementById('wind-speed');
 const uvIndexEl = document.getElementById('uv-index');
 
-
+const weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=";
+const oneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat=";
+const apiKey = "&units=imperial&appid=5264f5c6cb00caeab126066957171739";
 
 const iconsDay = {
     800 : "<i class='bi bi-brightness-high'></i>",
@@ -130,9 +132,7 @@ const iconsNight = {
 };
 
 
-const weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-const oneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat=";
-const apiKey = "&units=imperial&appid=5264f5c6cb00caeab126066957171739";
+
 
 var weatherData = new Object();
 var date = moment();
