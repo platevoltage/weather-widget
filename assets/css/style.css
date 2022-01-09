@@ -42,6 +42,9 @@ button {
     background-color: #ffffff33;
     border-style: none;
 }
+i {
+    font-size: 120px;
+}
 
 #previous-search {
     margin-top: 20px;
@@ -82,6 +85,16 @@ header {
     margin: 10px;
     padding: 10px;
 }
+.forecast-day-container {
+    /* background-color: #ffffff33; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
+.forecast-day-container span {
+    text-align: center;
+    /* background-color: #ffffff33; */
+}
 
 

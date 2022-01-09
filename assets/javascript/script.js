@@ -8,6 +8,13 @@ const humidityEl = document.getElementById('humidity');
 const windSpeedEl = document.getElementById('wind-speed');
 const uvIndexEl = document.getElementById('uv-index');
 
+const iconRain = "<i class='bi bi-cloud-drizzle'></i>";
+const iconPartlySunny = "<i class='bi bi-cloud-sun'></i>";
+const iconLightningRain = "<i class='bi bi-cloud-lightning-rain'></i>";
+const iconSnow = "<i class='bi bi-cloud-snow'></i>";
+const iconSleet = "<i class='bi bi-cloud-sleet'></i>";
+
+
 const weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=";
 const oneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat="
 const fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q="
@@ -123,9 +130,20 @@ searchEl.addEventListener('submit', function(event) {
   }
 
 
-forecastEl.children[0].innerHTML = "Tomorrow";
-forecastEl.children[1].innerHTML = date.add(2,'days').format('dddd');
-forecastEl.children[2].innerHTML = date.add(1,'days').format('dddd');
-forecastEl.children[3].innerHTML = date.add(1,'days').format('dddd');
-forecastEl.children[4].innerHTML = date.add(1,'days').format('dddd');
+forecastEl.children[0].children[0].children[0].innerHTML = "Tomorrow";
+forecastEl.children[0].children[0].children[1].innerHTML = iconSleet;
+forecastEl.children[1].children[0].children[0].innerHTML = date.add(2,'days').format('dddd');
+forecastEl.children[1].children[0].children[1].innerHTML = iconSleet;
+forecastEl.children[2].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+forecastEl.children[2].children[0].children[1].innerHTML = iconSleet;
+forecastEl.children[3].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+forecastEl.children[3].children[0].children[1].innerHTML = iconSleet;
+forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+forecastEl.children[4].children[0].children[1].innerHTML = iconSleet;
+
+
+// forecastEl.children[1].innerHTML = "<span>"+date.add(2,'days').format('dddd')+"</span>";
+// forecastEl.children[2].innerHTML = date.add(1,'days').format('dddd');
+// forecastEl.children[3].innerHTML = date.add(1,'days').format('dddd');
+// forecastEl.children[4].innerHTML = date.add(1,'days').format('dddd');
 
