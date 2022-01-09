@@ -205,7 +205,8 @@ searchEl.addEventListener('submit', function(event) {
 
 
   function weatherFetch(requestUrl) {
- 
+
+    cityEl.textContent = "Loading weather..."
     fetch(requestUrl)
       .then(function (response) {
         if (response.status === 200) {
