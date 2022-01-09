@@ -12,30 +12,40 @@
     <main>
 
         <aside>
-            Search for a city:
+            <span id="search-title">Search for a city:</span>
             <form id="search">
                 <input type="text" id="user-search" placeholder="City, State, Country">
-                <button type="submit">Go!</button>
-                
+                <div>
+                <button type="submit" id="go">Go!</button>
+                </div>
             </form>
-            <div id="previous-search"></div>
+            <div id="previous-search">
+                <!-- search history -->
+            </div>
+                <button type="submit" id="clear-history">clear</button>
 
         </aside>
         <section>
             <header>
                 <div class="container-row">
-                    <div id="city">City Place</div>&nbsp;
-                    <div id="date"></div>
+                    <div>
+                        <span id="city"></span>
+                        <span id="coordinates">.....</span>
+                    </div>&nbsp;
+                    <div id="date">
+
+                    </div>
                 </div>
                 <div class="container-row">
                     <div>
+                        <span id="weather"></span><br>
                         Temperature:&nbsp;<span id="temperature"></span><br>
                         Humidity:&nbsp;<span id="humidity"></span><br>
                         Wind Speed:&nbsp;<span id="wind-speed"></span><br>
-                        <div id="uv-index-container">UV Index:&nbsp;<span id="uv-index"></span></div>
+                        UV Index:&nbsp; <span id="uv-index"></span>
                     </div>
                     <div id="weather-icon">
-                        <i class='bi bi-cloud-snow'></i>
+                        <!-- <i class='bi bi-cloud-snow'></i> -->
                     </div>
                 </div>
             </header>
