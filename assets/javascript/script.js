@@ -293,7 +293,8 @@ searchEl.addEventListener('submit', function(event) {
     
             for (var i=0; i < 5; i++) {
                 forecastEl.children[i].children[0].children[1].innerHTML = iconsDay[data.hourly[i+1].weather[0].id];
-                forecastEl.children[i].children[0].children[2].innerHTML = Math.round( data.hourly[i+1].temp ) + "°F";
+                forecastEl.children[i].children[0].children[2].children[0].innerHTML = Math.round( data.hourly[i+1].temp ) + "°F";
+                forecastEl.children[i].children[0].children[2].children[1].innerHTML = Math.round( data.hourly[i+1].humidity ) + "%";
             }
 
         });
