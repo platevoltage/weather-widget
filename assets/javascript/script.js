@@ -70,9 +70,8 @@ const icons = {
 
 
 const weatherURL = "http://api.openweathermap.org/data/2.5/weather?q=";
-const oneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat="
-const fiveDayURL = "https://api.openweathermap.org/data/2.5/forecast?q="
-const apiKey = "&units=imperial&appid=5264f5c6cb00caeab126066957171739"
+const oneCallURL = "https://api.openweathermap.org/data/2.5/onecall?lat=";
+const apiKey = "&units=imperial&appid=5264f5c6cb00caeab126066957171739";
 
 var weatherData = new Object();
 var date = moment();
@@ -85,9 +84,9 @@ dateEl.innerHTML = date.format('dddd, MMMM Do YYYY');
 
 
 if (previousSearchArray.length > 0) {
-    weatherFetch(fiveDayURL + previousSearchArray[0] + apiKey);
+    weatherFetch(weatherURL + previousSearchArray[0] + apiKey);
 } else {
-    weatherFetch(fiveDayURL + "San Francisco" + apiKey);
+    weatherFetch(weatherURL + "San Francisco" + apiKey);
 }
 
 updatePreviousSearch();
@@ -117,7 +116,7 @@ searchEl.addEventListener('submit', function(event) {
         } else {
 
         }
-        weatherFetch(fiveDayURL + search.value + apiKey);
+        weatherFetch(weatherURL + search.value + apiKey);
         localStorage.setItem("previousSearch", JSON.stringify(previousSearchArray) );
         
         
@@ -127,8 +126,7 @@ searchEl.addEventListener('submit', function(event) {
   });
 
   previousSearchEl.addEventListener("click", function(event) {
-    // console.log(event.target.textContent);
-    weatherFetch(fiveDayURL + event.target.textContent + apiKey);
+    weatherFetch(weatherURL + event.target.textContent + apiKey);
   });
 
 
@@ -142,48 +140,11 @@ searchEl.addEventListener('submit', function(event) {
         return response.json();
       })
       .then(function (data) {
-        var lat = data.city.coord.lat;
-        var lon = data.city.coord.lon;
-        var fiveDayForecast = [
-            {
-                weather: data.list[0].weather[0].id,
-                temp: data.list[0].main.temp,
-                humidity: data.list[0].main.humidity
-            },{
-                weather: data.list[8].weather[0].id,
-                temp: data.list[8].main.temp,
-                humidity: data.list[8].main.humidity
-            },{
-                weather: data.list[16].weather[0].id,
-                temp: data.list[16].main.temp,
-                humidity: data.list[16].main.humidity
-            },{
-                weather: data.list[24].weather[0].id,
-                temp: data.list[24].main.temp,
-                humidity: data.list[24].main.humidity
-            },{
-                weather: data.list[32].weather[0].id,
-                temp: data.list[32].main.temp,
-                humidity: data.list[32].main.humidity
-            }, 
-        ];
+        console.log(data);
+        var lat = data.coord.lat;
+        var lon = data.coord.lon;
+        cityEl.textContent = data.name;
 
-
-        cityEl.textContent = data.city.name;
-        temperatureEl.textContent = Math.round( data.list[0].main.temp ) + "°F";
-        humidityEl.textContent = data.list[0].main.humidity + "%";
-        windSpeedEl.textContent = Math.round( data.list[0].wind.speed ) + " mph";
-      
-        forecastEl.children[0].children[0].children[0].innerHTML = "Tomorrow";
-        forecastEl.children[1].children[0].children[0].innerHTML = date.add(2,'days').format('dddd');
-        forecastEl.children[2].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-        forecastEl.children[3].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-        forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
-
-        for (var i=0; i < 5; i++) {
-            forecastEl.children[i].children[0].children[1].innerHTML = icons[fiveDayForecast[i].weather];
-            forecastEl.children[i].children[0].children[2].innerHTML = Math.round( fiveDayForecast[i].temp ) + "°F";
-        }
 
         weatherFetch2(oneCallURL + lat + "&lon=" + lon + apiKey);
 
@@ -196,10 +157,15 @@ searchEl.addEventListener('submit', function(event) {
             return response.json();
         })
         .then(function (data) {
-            // console.log("data",data)
-            var uvIndex = data.current.uvi;
-            // var uvIndex = 4;
+            console.log(data);
+            console.log();
+            let uvIndex = data.current.uvi;
+           
             uvIndexEl.textContent = uvIndex;
+            temperatureEl.textContent = Math.round( data.current.temp ) + "°F";
+            humidityEl.textContent = data.current.humidity + "%";
+            windSpeedEl.textContent = Math.round( data.current.wind_speed ) + " mph";
+
             switch (uvIndex) {
                 case 0:
                 case 1:
@@ -210,25 +176,37 @@ searchEl.addEventListener('submit', function(event) {
                 case 3:
                 case 4:
                 case 5: {
-                    uvIndexContainerEl.style.backgroundColor = "#ffff00dd";
+                    uvIndexContainerEl.style.backgroundColor = "#ffff0088";
                     break;
                 }
                 case 6:
                 case 7: {
-                    uvIndexContainerEl.style.backgroundColor = "#ff9900dd";
+                    uvIndexContainerEl.style.backgroundColor = "#ff990088";
                     break;
                 }
                 case 8: 
                 case 9: 
                 case 10: {
-                    uvIndexContainerEl.style.backgroundColor = "#ff0000dd";
+                    uvIndexContainerEl.style.backgroundColor = "#ff000088";
                     break;
                 }
                 default: {
-                    uvIndexContainerEl.style.backgroundColor = "#ff00ffdd";
+                    uvIndexContainerEl.style.backgroundColor = "#ff00ff88";
                     
                 }
 
+            }
+       
+          
+            forecastEl.children[0].children[0].children[0].innerHTML = "Tomorrow";
+            forecastEl.children[1].children[0].children[0].innerHTML = date.add(2,'days').format('dddd');
+            forecastEl.children[2].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+            forecastEl.children[3].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+            forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').format('dddd');
+    
+            for (var i=0; i < 5; i++) {
+                forecastEl.children[i].children[0].children[1].innerHTML = icons[data.hourly[i+1].weather[0].id];
+                forecastEl.children[i].children[0].children[2].innerHTML = Math.round( data.hourly[i+1].temp ) + "°F";
             }
 
         });

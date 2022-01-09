@@ -14,7 +14,7 @@
         <aside>
             Search for a city:
             <form id="search">
-                <input type="text" id="user-search" placeholder="city...">
+                <input type="text" id="user-search" placeholder="City, State, Country">
                 <button type="submit">Go!</button>
                 
             </form>
@@ -23,14 +23,21 @@
         </aside>
         <section>
             <header>
-                <span id="city">City Place</span>&nbsp;
-                <span id="date"></span>
-                <p>
-                    Temperature:&nbsp;<span id="temperature"></span><br>
-                    Humidity:&nbsp;<span id="humidity"></span><br>
-                    Wind Speed:&nbsp;<span id="wind-speed"></span><br>
-                    <div id="uv-index-container">UV Index:&nbsp;<span id="uv-index"></span></div>
-                </p>
+                <div class="container-row">
+                    <div id="city">City Place</div>&nbsp;
+                    <div id="date"></div>
+                </div>
+                <div class="container-row">
+                    <div>
+                        Temperature:&nbsp;<span id="temperature"></span><br>
+                        Humidity:&nbsp;<span id="humidity"></span><br>
+                        Wind Speed:&nbsp;<span id="wind-speed"></span><br>
+                        <div id="uv-index-container">UV Index:&nbsp;<span id="uv-index"></span></div>
+                    </div>
+                    <div id="weather-icon">
+                        <i class='bi bi-cloud-snow'></i>
+                    </div>
+                </div>
             </header>
             <div id="forecast">
                 <div id="1" class="forecast-day">
