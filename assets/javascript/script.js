@@ -229,7 +229,7 @@ searchEl.addEventListener('submit', function(event) {
             previousSearchEl.removeChild(previousSearchEl.firstChild);
             setTimeout(function () {
                 cityEl.textContent = previousSearchArray[0];
-            },1000);
+            },2000);
         }
       });
   }
