@@ -126,6 +126,11 @@ searchEl.addEventListener('submit', function(event) {
     }
   });
 
+  previousSearchEl.addEventListener("click", function(event) {
+    // console.log(event.target.textContent);
+    weatherFetch(fiveDayURL + event.target.textContent + apiKey);
+  });
+
 
   
 
@@ -225,10 +230,6 @@ searchEl.addEventListener('submit', function(event) {
                 }
 
             }
-            
-        
-        // uvIndexContainerEl.style.backgroundColor = "#00ff00";
-
 
         });
   }
