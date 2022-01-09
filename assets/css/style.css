@@ -2,8 +2,7 @@
     /* position: relative; */
     font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS',  'sans-serif';
     border-radius: 10px;
-    -webkit-backdrop-filter: blur(1px);
-    backdrop-filter: blur(1px);
+
 
 }
 
@@ -16,6 +15,8 @@ body {
 
 aside, header, #forecast  {
     box-shadow: 3px 3px 3px #00000055;
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
     /* border: 1px solid #00000055; */
 }
 

@@ -195,7 +195,7 @@ searchEl.addEventListener('submit', function(event) {
   previousSearchEl.addEventListener("click", function(event) {
     weatherFetch(weatherURL + event.target.textContent + apiKey);
   });
-  clearHistoryEl.addEventListener("click", function(event) {
+  clearHistoryEl.addEventListener("click", function() {
     previousSearchArray = [];
     localStorage.removeItem("previousSearch");
     previousSearchEl.innerHTML = "";
@@ -262,7 +262,7 @@ searchEl.addEventListener('submit', function(event) {
             windSpeedEl.textContent = Math.round( data.current.wind_speed ) + " mph";
             uvIndexEl.textContent = uvIndex;
 
-            switch (uvIndex) {
+            switch (Math.round(uvIndex)) {
                 case 0:
                 case 1:
                 case 2: {
