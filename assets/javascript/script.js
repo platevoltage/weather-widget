@@ -228,7 +228,8 @@ searchEl.addEventListener('submit', function(event) {
             previousSearchArray.splice(0, 1);
             previousSearchEl.removeChild(previousSearchEl.firstChild);
             setTimeout(function () {
-                cityEl.textContent = previousSearchArray[0];
+                if (previousSearchArray.length) cityEl.textContent = previousSearchArray[0];
+                else cityEl.textContent = "San Francisco";
             },2000);
         }
       });
@@ -252,7 +253,7 @@ searchEl.addEventListener('submit', function(event) {
                 backgroundImageEl.innerHTML = iconsNight[data.current.weather[0].id];
             } else {
                 weatherIconEl.innerHTML = iconsDay[data.current.weather[0].id];
-                backgroundImageEl.innerHTML = iconsNight[data.current.weather[0].id];
+                backgroundImageEl.innerHTML = iconsDay[data.current.weather[0].id];
             }
             
 
