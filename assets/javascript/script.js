@@ -206,7 +206,8 @@ searchEl.addEventListener('submit', function(event) {
 
   function weatherFetch(requestUrl) {
 
-    cityEl.textContent = "Loading weather..."
+    cityEl.textContent = "Loading weather...";
+    coordinatesEl.textContent = "";
     fetch(requestUrl)
       .then(function (response) {
         if (response.status === 200) {
@@ -221,7 +222,7 @@ searchEl.addEventListener('submit', function(event) {
             var lat = data.coord.lat;
             var lon = data.coord.lon;
             cityEl.textContent = data.name;
-            coordinatesEl.textContent = lat + ", " + lon;
+            coordinatesEl.innerHTML = lat + ", " + lon;
             weatherFetch2(oneCallURL + lat + "&lon=" + lon + apiKey);
             localStorage.setItem("previousSearch", JSON.stringify(previousSearchArray) );
         } else { // error handling
