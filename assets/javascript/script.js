@@ -177,11 +177,9 @@ searchEl.addEventListener('submit', function(event) {
         newSave.innerHTML = search.value;
         previousSearchEl.insertBefore(newSave, previousSearchEl.firstChild);
         
-        if (previousSearchArray.length > 8) {
+        if (previousSearchArray.length > 7) {
             previousSearchArray.pop();
-            previousSearchEl.removeChild(previousSearchEl.lastChild);
-        } else {
-
+            previousSearchEl.removeChild(previousSearchEl.children[7]);
         }
         weatherFetch(weatherURL + search.value + apiKey);
         
@@ -204,7 +202,7 @@ searchEl.addEventListener('submit', function(event) {
   
 
 
-  function weatherFetch(requestUrl) {
+  function weatherFetch(requestUrl) { //Weather API
 
     cityEl.textContent = "Loading weather...";
     coordinatesEl.textContent = "";
@@ -218,7 +216,6 @@ searchEl.addEventListener('submit', function(event) {
       })
       .then(function (data) {
         if (data) {
-            console.log(data);
             var lat = data.coord.lat;
             var lon = data.coord.lon;
             cityEl.textContent = data.name;
@@ -236,15 +233,13 @@ searchEl.addEventListener('submit', function(event) {
         }
       });
   }
-  function weatherFetch2(requestUrl) {
+  function weatherFetch2(requestUrl) { //One call API
  
     fetch(requestUrl)
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
-            console.log();
             let uvIndex = data.current.uvi;
             let night = (data.current.weather[0].icon[2] == 'n');
 
@@ -264,7 +259,7 @@ searchEl.addEventListener('submit', function(event) {
             windSpeedEl.textContent = Math.round( data.current.wind_speed ) + " mph";
             uvIndexEl.textContent = uvIndex;
 
-            switch (Math.round(uvIndex)) {
+            switch (Math.round(uvIndex)) { //UV index color coding
                 case 0:
                 case 1:
                 case 2: {
@@ -296,7 +291,7 @@ searchEl.addEventListener('submit', function(event) {
             }
        
           
-    
+            // 5 day forecast blocks
             for (var i=0; i < 5; i++) {
                 forecastEl.children[i].children[0].children[1].innerHTML = iconsDay[data.hourly[i+1].weather[0].id];
                 forecastEl.children[i].children[0].children[2].children[0].innerHTML = Math.round( data.hourly[i+1].temp ) + "°F";
