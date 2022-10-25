@@ -1,6 +1,6 @@
 # weather-widget
 
-## https://antieatingactivist.github.io/weather-widget/
+## https://platevoltage.github.io/weather-widget/
 
 A simple web app that fetches weather data from Openweathermap.org. Current and 5 day forcast weather data is provided once a city name is entered. A search history is displayed for ease of use and the entire app is mobile responsive.
 
@@ -53,14 +53,14 @@ forecastEl.children[4].children[0].children[0].innerHTML = date.add(1,'days').fo
 
 ## Deployed Link
 
-* [https://antieatingactivist.github.io/weather-widget/](https://antieatingactivist.github.io/weather-widget/)
+* [https://platevoltage.github.io/weather-widget/](https://antieatingactivist.github.io/weather-widget/)
 
 
 ## Authors
 
 Garrett Corbin
 
-- [https://antieatingactivist.github.io/weather-widget//](https://antieatingactivist.github.io/weather-widget/)
-- [https://github.com/antieatingactivist/](https://github.com/)
+- [https://platevoltage.github.io/weather-widget//](https://antieatingactivist.github.io/weather-widget/)
+- [https://github.com/platevoltage/](https://github.com/)
 - [https://www.linkedin.com/in/garrett-corbin-7a7777227/](https://www.linkedin.com/)
 
